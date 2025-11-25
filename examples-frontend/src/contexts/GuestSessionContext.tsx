@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useRef, type ReactNode } from 'react';
-import { guestSessionApi, type GuestSession } from '../lib/api';
+import { guestSessionApi, type GuestSession } from '../lib/fetch-client';
 import { getGuestToken, setGuestToken, clearGuestToken } from '../lib/cookies';
 import { useAuth } from './AuthContext';
 import { setCookie } from '../lib/cookies';

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { magicLinkApi } from '@/lib/api';
+import { magicLinkApi } from '@/lib/fetch-client';
 import { useAuth } from '@/contexts/AuthContext';
 import { setCookie } from '@/lib/cookies';
 import { Button } from '@/components/ui/button';

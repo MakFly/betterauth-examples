@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1ca1fca509ae535d79673dadfd3378c",
+    "content-hash": "e09a40a026a4ddc4f2e02274656b1319",
     "packages": [
         {
             "name": "api-platform/core",
@@ -287,8 +287,8 @@
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../betterauth-core",
-                "reference": "640d784611607be5996660e7741ea10379fa67c7"
+                "url": "../../betterauth-core",
+                "reference": "45486770609aab0b06ececea599f3339f221a7b3"
             },
             "require": {
                 "bacon/bacon-qr-code": "^2.0",
@@ -304,14 +304,15 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.48",
-                "illuminate/database": "^10.0|^11.0",
                 "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^10.5"
             },
-            "suggest": {
-                "illuminate/database": "Required for Eloquent storage implementations (Laravel integration)"
-            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "BetterAuth\\Core\\": "src/core/",
@@ -364,6 +365,7 @@
                 "source": "https://github.com/betterauth/betterauth-core"
             },
             "transport-options": {
+                "symlink": true,
                 "relative": true
             }
         },
@@ -372,12 +374,12 @@
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../betterauth-symfony",
-                "reference": "297977d1cd43ed053dc7e46addbc5dd13b9af6b0"
+                "url": "../../betterauth-symfony",
+                "reference": "089b438dad092ea9b7b18c0ba3749f175a2c052e"
             },
             "require": {
                 "api-platform/core": "^4.0",
-                "betterauth/core": "^1.0",
+                "betterauth/core": "^1.0|dev-main",
                 "doctrine/doctrine-bundle": "^2.0|^3.0",
                 "doctrine/doctrine-migrations-bundle": "^3.0",
                 "doctrine/orm": "^3.0",
@@ -474,6 +476,7 @@
                 "source": "https://github.com/betterauth/betterauth-symfony"
             },
             "transport-options": {
+                "symlink": true,
                 "relative": true
             }
         },
@@ -8776,31 +8779,31 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.64.0",
+            "version": "v1.65.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "c86da84640b0586e92aee2b276ee3638ef2f425a"
+                "reference": "9a0276d7486b29cae641b4a0a85d5e5cc149bff2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/c86da84640b0586e92aee2b276ee3638ef2f425a",
-                "reference": "c86da84640b0586e92aee2b276ee3638ef2f425a",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/9a0276d7486b29cae641b4a0a85d5e5cc149bff2",
+                "reference": "9a0276d7486b29cae641b4a0a85d5e5cc149bff2",
                 "shasum": ""
             },
             "require": {
                 "doctrine/inflector": "^2.0",
                 "nikic/php-parser": "^5.0",
                 "php": ">=8.1",
-                "symfony/config": "^6.4|^7.0",
-                "symfony/console": "^6.4|^7.0",
-                "symfony/dependency-injection": "^6.4|^7.0",
+                "symfony/config": "^6.4|^7.0|^8.0",
+                "symfony/console": "^6.4|^7.0|^8.0",
+                "symfony/dependency-injection": "^6.4|^7.0|^8.0",
                 "symfony/deprecation-contracts": "^2.2|^3",
-                "symfony/filesystem": "^6.4|^7.0",
-                "symfony/finder": "^6.4|^7.0",
-                "symfony/framework-bundle": "^6.4|^7.0",
-                "symfony/http-kernel": "^6.4|^7.0",
-                "symfony/process": "^6.4|^7.0"
+                "symfony/filesystem": "^6.4|^7.0|^8.0",
+                "symfony/finder": "^6.4|^7.0|^8.0",
+                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
+                "symfony/http-kernel": "^6.4|^7.0|^8.0",
+                "symfony/process": "^6.4|^7.0|^8.0"
             },
             "conflict": {
                 "doctrine/doctrine-bundle": "<2.10",
@@ -8808,13 +8811,14 @@
             },
             "require-dev": {
                 "composer/semver": "^3.0",
-                "doctrine/doctrine-bundle": "^2.5.0",
+                "doctrine/doctrine-bundle": "^2.5.0|^3.0.0",
                 "doctrine/orm": "^2.15|^3",
-                "symfony/http-client": "^6.4|^7.0",
-                "symfony/phpunit-bridge": "^6.4.1|^7.0",
-                "symfony/security-core": "^6.4|^7.0",
-                "symfony/security-http": "^6.4|^7.0",
-                "symfony/yaml": "^6.4|^7.0",
+                "doctrine/persistence": "^3.1|^4.0",
+                "symfony/http-client": "^6.4|^7.0|^8.0",
+                "symfony/phpunit-bridge": "^6.4.1|^7.0|^8.0",
+                "symfony/security-core": "^6.4|^7.0|^8.0",
+                "symfony/security-http": "^6.4|^7.0|^8.0",
+                "symfony/yaml": "^6.4|^7.0|^8.0",
                 "twig/twig": "^3.0|^4.x-dev"
             },
             "type": "symfony-bundle",
@@ -8849,7 +8853,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.64.0"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.65.0"
             },
             "funding": [
                 {
@@ -8861,11 +8865,15 @@
                     "type": "github"
                 },
                 {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
                     "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-23T16:12:08+00:00"
+            "time": "2025-11-24T15:41:51+00:00"
         },
         {
             "name": "symfony/process",

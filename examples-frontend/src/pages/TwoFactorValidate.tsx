@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { twoFactorApi } from '@/lib/api';
+import { twoFactorApi } from '@/lib/fetch-client';
 import { useAuth } from '@/contexts/AuthContext';
 import { setCookie } from '@/lib/cookies';
 import { Button } from '@/components/ui/button';

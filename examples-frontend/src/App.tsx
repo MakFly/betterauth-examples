@@ -3,6 +3,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { GuestSessionProvider } from './contexts/GuestSessionContext';
 import { ToastProvider } from './components/ui/toast';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { TokenRefreshMonitor } from './components/TokenRefreshMonitor';
 
 // Pages
 import { LoginStyled as Login } from './pages/LoginStyled';
@@ -15,6 +16,7 @@ import { MagicLink } from './pages/MagicLink';
 import { ForgotPassword } from './pages/ForgotPassword';
 import { ResetPassword } from './pages/ResetPassword';
 import { EmailVerification } from './pages/EmailVerification';
+import { OAuthCallback } from './pages/OAuthCallback';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/2fa/validate" element={<TwoFactorValidate />} />
+              <Route path="/auth/email/verify" element={<EmailVerification />} />
+              <Route path="/oauth/callback" element={<OAuthCallback />} />
 
               {/* Protected routes */}
               <Route
@@ -70,6 +74,8 @@ function App() {
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
+            {/* Token refresh monitor - shows in bottom right corner */}
+            <TokenRefreshMonitor />
           </BrowserRouter>
         </GuestSessionProvider>
       </AuthProvider>

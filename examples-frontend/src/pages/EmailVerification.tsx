@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { emailApi } from '@/lib/api';
+import { emailApi } from '@/lib/fetch-client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,13 +8,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 export function EmailVerification() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { user, refreshUser } = useAuth();
+  const { user, refreshUser, isAuthenticated } = useAuth();
   const [verifying, setVerifying] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState('');
   const hasVerified = useRef(false);
+  const tokenFromUrl = searchParams.get('token');
 
   const verifyEmail = async (token: string) => {
     // Prevent double verification
@@ -27,9 +28,12 @@ export function EmailVerification() {
       await emailApi.verify(token);
       setSuccess(true);
       setMessage('Your email has been verified successfully!');
-      await refreshUser();
+      // Only refresh user if authenticated
+      if (isAuthenticated) {
+        await refreshUser();
+      }
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to verify email');
+      setError(err.response?.data?.error || err.response?.data?.message || 'Failed to verify email');
       hasVerified.current = false; // Allow retry on error
     } finally {
       setVerifying(false);
@@ -37,12 +41,11 @@ export function EmailVerification() {
   };
 
   useEffect(() => {
-    const token = searchParams.get('token');
-    if (token) {
-      verifyEmail(token);
+    if (tokenFromUrl) {
+      verifyEmail(tokenFromUrl);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams]);
+  }, [tokenFromUrl]);
 
   const handleSendVerification = async () => {
     try {
@@ -102,9 +105,50 @@ export function EmailVerification() {
           <CardContent>
             <Button
               className="w-full"
-              onClick={() => navigate('/dashboard')}
+              onClick={() => navigate(isAuthenticated ? '/dashboard' : '/login')}
             >
-              Go to Dashboard
+              {isAuthenticated ? 'Go to Dashboard' : 'Sign in'}
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // If not authenticated and no token, redirect to login
+  if (!isAuthenticated && !tokenFromUrl) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader className="space-y-1">
+            <div className="flex items-center justify-center mb-2">
+              <div className="h-12 w-12 rounded-full bg-yellow-500 flex items-center justify-center">
+                <svg
+                  className="h-6 w-6 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <CardTitle className="text-2xl text-center">Sign in required</CardTitle>
+            <CardDescription className="text-center">
+              Please sign in to verify your email or request a new verification link
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button
+              className="w-full"
+              onClick={() => navigate('/login')}
+            >
+              Sign in
             </Button>
           </CardContent>
         </Card>

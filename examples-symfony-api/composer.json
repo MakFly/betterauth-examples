@@ -6,11 +6,17 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../betterauth-core"
+            "url": "../../betterauth-symfony",
+            "options": {
+                "symlink": true
+            }
         },
         {
             "type": "path",
-            "url": "../betterauth-symfony"
+            "url": "../../betterauth-core",
+            "options": {
+                "symlink": true
+            }
         }
     ],
     "require": {
@@ -22,7 +28,7 @@
         "monolog/monolog": "^3.9",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
-        "symfony/flex": "^2",
+        "symfony/flex": "^2.10",
         "symfony/framework-bundle": "7.3.*",
         "symfony/mailer": "7.3.*",
         "symfony/monolog-bundle": "^3.10",
@@ -81,7 +87,7 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "*",
+        "symfony/maker-bundle": ">=1.65",
         "symfony/stopwatch": "7.3.*"
     }
 }

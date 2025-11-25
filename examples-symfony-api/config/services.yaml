@@ -29,5 +29,5 @@ services:
             $fromEmail: '%env(MAILER_FROM_EMAIL)%'
             $fromName: '%env(MAILER_FROM_NAME)%'
 
-    # BetterAuth repositories are automatically configured by the EntityAutoConfigurationPass
-    # in the betterauth-symfony bundle. No manual configuration needed!
+    # BetterAuth repositories are automatically configured by EntityAutoConfigurationPass
+    # to use App\Entity\* classes. No manual configuration needed!
