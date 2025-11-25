@@ -1,6 +1,1 @@
-api_v1:
-    resource:
-        path: ../src/Controller/Api/
-        namespace: App\Controller\Api
-    type: attribute
-    prefix: /api/v1
+# Routes configuration

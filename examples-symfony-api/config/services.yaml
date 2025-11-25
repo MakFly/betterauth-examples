@@ -4,10 +4,6 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    env(MAILER_DSN): 'smtp://127.0.0.1:1025'
-    env(MAILER_FROM_EMAIL): 'noreply@betterauth.local'
-    env(MAILER_FROM_NAME): 'BetterAuth'
-    env(FRONTEND_URL): 'http://localhost:5173'
 
 services:
     # default configuration for services in *this* file
@@ -22,12 +18,3 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-
-    # Override email sender configuration
-    BetterAuth\Symfony\Service\SymfonyMailerEmailSender:
-        arguments:
-            $fromEmail: '%env(MAILER_FROM_EMAIL)%'
-            $fromName: '%env(MAILER_FROM_NAME)%'
-
-    # BetterAuth repositories are automatically configured by EntityAutoConfigurationPass
-    # to use App\Entity\* classes. No manual configuration needed!
