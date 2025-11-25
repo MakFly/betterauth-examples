@@ -1,0 +1,6 @@
+better_auth:
+    mode: api
+    secret: '%env(BETTER_AUTH_SECRET)%'
+    session:
+        lifetime: 604800
+        cookie_name: better_auth_session

@@ -1,0 +1,37 @@
+meta {
+  name: Revoke All Tokens
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{base_url}}/auth/revoke-all
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+script:post-response {
+  if (res.status === 200) {
+    bru.setEnvVar("access_token", "");
+    bru.setEnvVar("refresh_token", "");
+  }
+}
+
+docs {
+  # Revoke All Refresh Tokens
+
+  Revoke all refresh tokens for the current user.
+
+  ## Authentication
+  Requires a valid access token in the Authorization header.
+
+  ## Response
+  Returns a success message.
+
+  ## Use Case
+  Use this endpoint when you want to logout from all devices or suspect a security breach.
+}

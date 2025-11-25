@@ -1,0 +1,37 @@
+meta {
+  name: Logout
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{base_url}}/auth/logout
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+script:post-response {
+  if (res.status === 200) {
+    bru.setEnvVar("access_token", "");
+    bru.setEnvVar("refresh_token", "");
+  }
+}
+
+docs {
+  # Logout User
+
+  Logout the current user and invalidate the refresh token.
+
+  ## Authentication
+  Requires a valid access token in the Authorization header.
+
+  ## Response
+  Returns a success message.
+
+  ## Note
+  After logout, the tokens are cleared from environment variables.
+}

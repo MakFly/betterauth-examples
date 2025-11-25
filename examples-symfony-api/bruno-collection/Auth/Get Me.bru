@@ -1,0 +1,30 @@
+meta {
+  name: Get Me
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{base_url}}/auth/me
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{access_token}}
+}
+
+docs {
+  # Get Current User
+
+  Retrieve the currently authenticated user's information.
+
+  ## Authentication
+  Requires a valid access token in the Authorization header.
+
+  ## Response
+  Returns the current user object with all user details.
+
+  ## Note
+  Make sure to login first to get a valid access_token.
+}

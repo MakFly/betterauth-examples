@@ -1,0 +1,45 @@
+meta {
+  name: Refresh Token
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/auth/refresh
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "refreshToken": "{{refresh_token}}"
+  }
+}
+
+script:post-response {
+  if (res.status === 200) {
+    const data = res.body;
+    bru.setEnvVar("access_token", data.access_token);
+    bru.setEnvVar("refresh_token", data.refresh_token);
+  }
+}
+
+docs {
+  # Refresh Access Token
+
+  Refresh the access token using a valid refresh token.
+
+  ## Request Body
+  - `refreshToken` (required): Valid refresh token from login
+
+  ## Response
+  Returns:
+  - `access_token`: New Paseto V4 encrypted token
+  - `refresh_token`: New refresh token (rotation)
+  - `expires_in`: Token expiration time in seconds
+  - `token_type`: Bearer
+
+  ## Note
+  The refresh token is one-time use (rotation). After refreshing, the old refresh token is invalidated.
+  New tokens are automatically saved to environment variables.
+}

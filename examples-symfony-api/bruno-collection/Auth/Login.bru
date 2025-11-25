@@ -1,0 +1,47 @@
+meta {
+  name: Login
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "john.doe@example.com",
+    "password": "SecurePassword123!"
+  }
+}
+
+script:post-response {
+  if (res.status === 200) {
+    const data = res.body;
+    bru.setEnvVar("access_token", data.access_token);
+    bru.setEnvVar("refresh_token", data.refresh_token);
+  }
+}
+
+docs {
+  # Login User
+
+  Authenticate a user with email and password.
+
+  ## Request Body
+  - `email` (required): User email address
+  - `password` (required): User password
+
+  ## Response
+  Returns:
+  - `access_token`: Paseto V4 encrypted token (valid for 2 hours)
+  - `refresh_token`: Token to refresh access token (valid for 30 days)
+  - `expires_in`: Token expiration time in seconds
+  - `token_type`: Bearer
+  - `user`: User object
+
+  ## Note
+  The access_token and refresh_token are automatically saved to environment variables.
+}
